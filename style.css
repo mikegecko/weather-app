@@ -24,7 +24,24 @@
     background-color: #1d3557;
     height: calc(100vh - 4rem);
     color:#f1faee;
-    padding: 1.5rem;
+    padding:1rem;
+    gap: 8rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+.current-weather-card{
+    background-color: #457b9d;
+    height: max-content;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.forecast-bar{
+    height: 10rem;
+    width: 100%;
+    text-align: center;
+    background-color: #457b9d;
 }
 span{
     color: #f1faee;

@@ -13,6 +13,7 @@ const searchInput = document.querySelector("#location-search");
 const searchBtn = document.querySelector("#submit-search");
 
 let data;
+let forecast;
 searchBtn.addEventListener("click", submitSearch);
 searchInput.addEventListener("keypress", function (event) {
   if (event.keyCode === 13) {
@@ -32,20 +33,35 @@ async function getCurrentWeather(cityName) {
     console.log(error);
   }
 }
+async function getForecast(cityName){
+    try {
+        const response = await fetch(
+          `http://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${api_key}&units=${units}`
+        );
+        const forecastData = await response.json();
+        return forecastData;
+      } catch (error) {
+        console.log(error);
+      }
+}
 async function parseWeatherData(weatherData) {
   //Return an object with required data
   data = await weatherData;
-  WeatherDataPost(data);
-  console.log(data);
-}
-function submitSearch(event) {
-  parseWeatherData(getCurrentWeather(searchInput.value));
-}
-function WeatherDataPost(data) {
-  currentWeatherSpan.textContent = data.weather[0].description;
+  currentWeatherSpan.textContent = data.weather[0].main;
   locationSpan.textContent = data.name;
   tempSpan.textContent = data.main.temp;
   feelSpan.textContent = data.main.feels_like;
   humiditySpan.textContent = data.main.humidity;
+
+  console.log(data);
 }
+async function pasreForecastData(forecastData){
+    forecast = await forecastData;
+    console.log(forecast);
+}
+function submitSearch(event) {
+  parseWeatherData(getCurrentWeather(searchInput.value));
+  pasreForecastData(getForecast(searchInput.value));
+}
+
 //parseWeatherData(getCurrentWeather());
