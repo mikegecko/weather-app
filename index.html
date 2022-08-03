@@ -7,8 +7,27 @@
     <title>Weather App</title>
     <link rel="stylesheet" href="style.css">
     <script src="main.js" defer></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    
+    <div class="header">
+        <span class="material-symbols-outlined md-48">
+            nest_farsight_weather
+        </span>
+        <div class="search-container">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+            <input type="search" name="" id="" placeholder="Please enter a city">
+            <button id="">Search</button>
+        </div>
+    </div>
+    <div class="content">
+        <p>Location: <span id="location"></span></p>
+        <p>Weather: <span id="current-weather"></span></p>
+        <p>Temperature: <span id="current-temp"></span>℉</p>
+        <p>Feels like: <span id="feels-like"></span>℉</p>
+        <p>Humidity: <span id="humidity"></span>%</p>
+    </div>
 </body>
 </html>
