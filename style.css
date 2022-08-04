@@ -9,7 +9,7 @@
 }
 .header{
     background-color: #457b9d;
-    height: 4rem;
+    height: auto;
     display: flex;
     align-items: center;
     gap: 3rem;

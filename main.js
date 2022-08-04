@@ -56,12 +56,26 @@ async function parseWeatherData(weatherData) {
   console.log(data);
 }
 async function pasreForecastData(forecastData){
+    //Data for forecast cards
+    // Temp hi, temp low, weather, humidity, time/date
     forecast = await forecastData;
-    console.log(forecast);
+    console.log(forecast.list);
+    for (const fr of forecast.list) {
+        const time = new Date(data.dt*1000);
+        createForecastCard(fr, time);
+    }
 }
 function submitSearch(event) {
   parseWeatherData(getCurrentWeather(searchInput.value));
   pasreForecastData(getForecast(searchInput.value));
 }
+function createForecastCard(weatherObj, time){
+    
+}
+let currentTime = new Date;
+let dt = 1659657600;
+let dtString = new Date(dt*1000);
 
+console.log(currentTime);
+console.log(dtString);
 //parseWeatherData(getCurrentWeather());
