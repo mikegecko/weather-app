@@ -11,6 +11,8 @@ const feelSpan = document.querySelector("#feels-like");
 const humiditySpan = document.querySelector("#humidity");
 const searchInput = document.querySelector("#location-search");
 const searchBtn = document.querySelector("#submit-search");
+const forecastDiv = document.querySelector('#forecast-bar');
+const spinner = document.querySelector('.loader');
 
 let data;
 let forecast;
@@ -65,17 +67,35 @@ async function pasreForecastData(forecastData){
         createForecastCard(fr, time);
     }
 }
-function submitSearch(event) {
-  parseWeatherData(getCurrentWeather(searchInput.value));
-  pasreForecastData(getForecast(searchInput.value));
+
+async function submitSearch(event) {
+    try {
+        showSpinner();
+        parseWeatherData(getCurrentWeather(searchInput.value));
+        pasreForecastData(getForecast(searchInput.value));
+        await sleep(1000);
+    } catch (error) {
+        console.log(error);
+    }
+    finally{
+        hideSpinner();
+    }
 }
 function createForecastCard(weatherObj, time){
     
-}
-let currentTime = new Date;
-let dt = 1659657600;
-let dtString = new Date(dt*1000);
+    let cardDiv = document.createElement('div');
 
-console.log(currentTime);
-console.log(dtString);
+}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+function showSpinner(){
+    spinner.style.display = 'block';
+    console.log('shown');
+}
+function hideSpinner(){
+    spinner.style.display = 'none';
+    console.log('hidden');
+}
+hideSpinner();
 //parseWeatherData(getCurrentWeather());
