@@ -79,6 +79,7 @@ async function pasreForecastData(forecastData){
 
 async function submitSearch(event) {
     try {
+        clearForecastBar();
         showSpinner();
         parseWeatherData(getCurrentWeather(searchInput.value));
         pasreForecastData(getForecast(searchInput.value));
@@ -104,6 +105,11 @@ function createForecastCard(weatherObj, time){
     cardDiv.appendChild(temp);
     cardDiv.classList.add('forecast-card');
     forecastDiv.appendChild(cardDiv);
+}
+function clearForecastBar() {
+    while (forecastDiv.firstChild) {
+        forecastDiv.removeChild(forecastDiv.firstChild);
+    }
 }
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
