@@ -13,6 +13,7 @@ const searchInput = document.querySelector("#location-search");
 const searchBtn = document.querySelector("#submit-search");
 const forecastDiv = document.querySelector('#forecast-bar');
 const spinner = document.querySelector('.loader');
+const overlay = document.querySelector('.overlay');
 
 let data;
 let forecast;
@@ -90,12 +91,15 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 function showSpinner(){
+    console.log(overlay);
+    console.log(spinner);
+    overlay.style.display = 'block';
     spinner.style.display = 'block';
     console.log('shown');
 }
 function hideSpinner(){
+    overlay.style.display = 'none';
     spinner.style.display = 'none';
     console.log('hidden');
 }
 hideSpinner();
-//parseWeatherData(getCurrentWeather());
