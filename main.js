@@ -11,7 +11,7 @@ const feelSpan = document.querySelector("#feels-like");
 const humiditySpan = document.querySelector("#humidity");
 const searchInput = document.querySelector("#location-search");
 const searchBtn = document.querySelector("#submit-search");
-const forecastDiv = document.querySelector('#forecast-bar');
+const forecastDiv = document.querySelector('.forecast-container');
 const spinner = document.querySelector('.loader');
 const overlay = document.querySelector('.overlay');
 
@@ -63,10 +63,18 @@ async function pasreForecastData(forecastData){
     // Temp hi, temp low, weather, humidity, time/date
     forecast = await forecastData;
     console.log(forecast.list);
-    for (const fr of forecast.list) {
-        const time = new Date(data.dt*1000);
-        createForecastCard(fr, time);
+    
+    for (let index = 0; index < 40; index++) {
+        const fr = forecast.list[index];
+        let time = new Date(forecast.list[index].dt*1000);
+        if(index < 7){
+            createForecastCard(fr, time);
+        }
     }
+    // for (const fr of forecast.list) {
+    //     const time = new Date(data.dt*1000);
+    //     createForecastCard(fr, time);
+    // }
 }
 
 async function submitSearch(event) {
@@ -83,23 +91,29 @@ async function submitSearch(event) {
     }
 }
 function createForecastCard(weatherObj, time){
-    
+    console.log(weatherObj);
     let cardDiv = document.createElement('div');
-
+    let temp = document.createElement('p');
+    temp.textContent = weatherObj.main.temp + "℉";
+    let weather = document.createElement('p');
+    weather.textContent = weatherObj.weather[0].main;
+    let dt = document.createElement('p');
+    dt.textContent = time.toLocaleString();
+    cardDiv.appendChild(dt);
+    cardDiv.appendChild(weather);
+    cardDiv.appendChild(temp);
+    cardDiv.classList.add('forecast-card');
+    forecastDiv.appendChild(cardDiv);
 }
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 function showSpinner(){
-    console.log(overlay);
-    console.log(spinner);
     overlay.style.display = 'block';
     spinner.style.display = 'block';
-    console.log('shown');
 }
 function hideSpinner(){
     overlay.style.display = 'none';
     spinner.style.display = 'none';
-    console.log('hidden');
 }
 hideSpinner();
